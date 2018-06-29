@@ -32,18 +32,11 @@ var TrackingHelper = (function (window, undefined) {
 		if(!customerId)
 			throw "customerId is required and cannot be empty";
 
-		this.clientSideCodedUrl = function (transactionId, currency, orderTotal, itemsUNiDAYSDiscount, code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer) {
+		this.createUrl = function (transactionId, currency, orderTotal, itemsUNiDAYSDiscount, code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer) {
 			var query = generateQuery(customerId, transactionId, null, currency, orderTotal, itemsUNiDAYSDiscount, code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer);
 
 			return trackingUrl + query;
 		};
-
-		this.clientSideCodelessUrl = function (transactionId, memberId, currency, orderTotal, itemsUNiDAYSDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer) {
-			var query = generateQuery(customerId, transactionId, memberId, currency, orderTotal, itemsUNiDAYSDiscount, null, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer);
-
-			return trackingUrl + query;
-		};
-
 	};
 
 })(window);
