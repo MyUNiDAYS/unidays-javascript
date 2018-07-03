@@ -1,25 +1,45 @@
 # Examples
 
-## Params of the createUrl method
+## Request Parameters
 
-(line 35 in `unidays.js`)
+The request must contain several parameters relating to the discount/promotion redemption, including your UNiDAYS `CustomerId` and a unique `TransactionId` to identify the transaction in your system (for debugging purposes).
 
-Pass the following parameters into the `createUrl` method to get a URL to call UNiDAYS on.
+### Example Basket
 
-| Parameter | Parameter value description |
-|---|---|
-| TransactionId  | Your Unique ID for the transaction ie Order123 |
-| Currency | ISO 4217 Currency Code |
-| OrderTotal | Total monetary amount paid, formatted to 2 decimal places |
-| ItemsUNiDAYSDiscount | Total monetary amount of UNiDAYS discount applied on gross item value ItemsGross, formatted to 2 decimal places |
-| Code | Discount code used |
-| ItemsTax | Total monetary amount of tax applied to items, formatted to 2 decimal places. |
-| ShippingGross | Total monetary amount of shipping discount (UNiDAYS or otherwise) applied to the order, formatted to 2 decimal places. |
-| ShippingDiscount | Total monetary amount paid, formatted to 2 decimal places |
-| ItemsGross | Total monetary amount of the items, including tax, before any discounts are applied, formatted to 2 decimal places. |
-| ItemsOtherDiscount | Total monetary amount of all non UNiDAYS discounts applies to ItemsGross, formatted to 2 decimal places |
-| UNiDAYSDiscountPercentage | The UNiDAYS discount applied as a percentage formatted to 2 decimal places. |
-| NewCustomer | Is the user a new (vs returning) customer to you? 1 if new, 0 if returning. |
+| Item | Gross | UNiDAYS Discount | Other Discount | Tax | Net Total | Line Total |
+|---|---|---|---|---|---|---|
+| Shoes | 100.00 | 0.00 | 0.00 | 16.67 | 83.33 | 100.00 |
+| Shirt | 50.00 | 5.00 | 0.00 | 7.50 | 37.50 | 45.00 |
+| Jeans | 80.00 | 8.00 | 10.00 | 10.33 | 51.67 | 62.00 |
+||||||||
+| **Totals** | 230.00 | 13.00 | 10.00 | 34.50 | 172.50 | 207.00 |
+||||||||
+|||||| Shipping | 5.00 |
+|||||| Shipping Discount | 3.00 |
+||||||||
+|||||| **Order Total** | 209.00 |
+
+### Parameters
+
+Note: These example values reference the Example Basket shown above.
+
+| Parameter | Description | Data Type | Example |
+|---|---|---|---|
+| CustomerId | Your `CustomerId` as provided by UNiDAYS | String | 0LTio6iVNaKj861RM9azJQ== |
+| TransactionId | A unique ID for the transaction in your system | String | Order123 |
+| Currency | The ISO 4217 currency code | String | GBP |
+| OrderTotal | Total monetary amount paid, formatted to 2 decimal places | Decimal | 209.00 |
+| ItemsUNiDAYSDiscount | Total monetary amount of UNiDAYS discount applied on gross item value `ItemsGross`, formatted to 2 decimal places | Decimal | 13.00 |
+| Code | The UNiDAYS discount code used | String | ABC123 |
+| ItemsTax | Total monetary amount of tax applied to items, formatted to 2 decimal places | Decimal | 34.50
+| ShippingGross | Total monetary amount of shipping cost, before any shipping discount or tax applied, formatted to 2 decimal places | Decimal | 5.00 |
+| ShippingDiscount | Total monetary amount of shipping discount (UNiDAYS or otherwise) applied to the order, formatted to 2 decimal places | Decimal | 3.00 |
+| ItemsGross | Total monetary amount of the items, including tax, before any discounts are applied, formatted to 2 decimal places | Decimal | 230.00 |
+| ItemsOtherDiscount | Total monetary amount of all non UNiDAYS discounts applied to `ItemsGross`, formatted to 2 decimal places | Decimal | 10.00 |
+| UNiDAYSDiscountPercentage | The UNiDAYS discount applied, as a percentage, formatted to 2 decimal places | Decimal | 10.00 |
+| NewCustomer | Is the user a new (vs returning) customer to you? | Boolean Integer | 0 or 1 |
+
+These parameters must be appended to the query string or sent in the request entity of a POST request.
 
 ## Example of createUrl usage
 
@@ -28,7 +48,7 @@ Pass the following parameters into the `createUrl` method to get a URL to call U
 <script type="text/javascript">
     (function (window) {
         // UNiDAYS will provide your customerId.
-        var customerId = 'someCustomerId';
+        var customerId = '0LTio6iVNaKj861RM9azJQ==';
 
         // Create a reference to the UNiDAYS TrackingHelper object, passing in your customerId.
         var unidays = new TrackingHelper(customerId);
@@ -37,13 +57,16 @@ Pass the following parameters into the `createUrl` method to get a URL to call U
         var trackingUrl = unidays.createUrl('Order123', 'GBP', 209.00, 13.00, 'ABC123', 34.50,
             5.00, 3.00, 230.00, 10.00, 10.00, 1);
 
-        // You now have a fully formed URL to call the UNiDAYS Tracking API,
-        // perform a HTTP request with this URL using your preferred method.
+        // You now have a fully formed URL to call the UNiDAYS Tracking API
+        var script = document.createElement('script');
+        script.setAttribute('src', trackingUrl);
+        script.setAttribute('type', 'text/javascript');
+        document.body.appendChild(script);
 
     }(window));
 </script>
 ```
 
-This creates a `trackingUrl` which can be used to call the UNiDAYS Tracking API, for example:
+Example of request generated by `createUrl`:
 
-> `https://tracking.myunidays.com/perks/redemption/v1.1.js?CustomerId=someCustomerId&TransactionId=Order123&MemberId=&Currency=GBP&OrderTotal=209.00&ItemsUNiDAYSDiscount=13.00&Code=ABC123&ItemsTax=34.50&ShippingGross=5.00&ShippingDiscount=3.00&ItemsGross=230.00&ItemsOtherDiscount=10.00&UNiDAYSDiscountPercentage=10.00&NewCustomer=1`
+> `https://tracking.myunidays.com/perks/redemption/v1.1.js?CustomerId=0LTio6iVNaKj861RM9azJQ%3d%3d&TransactionId=Order123&MemberId=&Currency=GBP&OrderTotal=209.00&ItemsUNiDAYSDiscount=13.00&Code=ABC123&ItemsTax=34.50&ShippingGross=5.00&ShippingDiscount=3.00&ItemsGross=230.00&ItemsOtherDiscount=10.00&UNiDAYSDiscountPercentage=10.00&NewCustomer=1`
