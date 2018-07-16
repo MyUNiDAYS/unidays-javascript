@@ -29,13 +29,21 @@ var TrackingHelper = (function (window, undefined) {
 
 	return function (customerId) {
 
-		if(!customerId)
+		if (!customerId)
 			throw "customerId is required and cannot be empty";
 
-		this.createUrl = function (transactionId, currency, orderTotal, itemsUNiDAYSDiscount, code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer) {
+		this.trackingRequest = function (transactionId, currency, orderTotal, itemsUNiDAYSDiscount, code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer) {
 			var query = generateQuery(customerId, transactionId, null, currency, orderTotal, itemsUNiDAYSDiscount, code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer);
 
-			return trackingUrl + query;
+			var url = trackingUrl + query;
+
+			(function (e, u) {
+				var t = e.getElementsByTagName("script")[0],
+					n = e.createElement("script");
+				n.async = true;
+				n.src = u;
+				t.parentNode.insertBefore(n, t)
+			})(document, url)
 		};
 	};
 
