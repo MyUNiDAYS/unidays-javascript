@@ -1,8 +1,8 @@
 var TrackingHelper = (function (window, undefined) {
 	"use strict";
 
-	var trackingUrl = "https://tracking.myunidays.com/perks/redemption/v1.1.js";
-	//var trackingUrl = "https://tracking.myunidays.com/perks/redemption/v1.1-test.js";
+	var trackingUrl = "https://tracking.myunidays.com/perks/redemption/v1.2.js";
+	//var trackingUrl = "https://tracking.myunidays.com/perks/redemption/v1.2-test.js";
 
 	function generateQuery(customerId, transactionId, memberId, currency, orderTotal, itemsUNiDAYSDiscount, code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer) {
 		return '?CustomerId=' + (customerId != null ? encode(customerId) : '') +
