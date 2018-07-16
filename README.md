@@ -28,6 +28,7 @@ Mandatory parameters are:
 * `CustomerId`
 * `TransactionId`
 * `Currency`
+* `Code`
 
 | Parameter | Description | Data Type | Example |
 |---|---|---|---|
