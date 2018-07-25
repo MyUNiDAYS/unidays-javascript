@@ -2,7 +2,7 @@
 
 ## Request Parameters
 
-The request must contain several parameters relating to the discount/promotion redemption, including your UNiDAYS `CustomerId` and a unique `TransactionId` to identify the transaction in your system (for debugging purposes).
+The request must contain several parameters relating to the discount/promotion redemption, including your UNiDAYS `partnerId` and a unique `transactionId` to identify the transaction in your system (for debugging purposes).
 
 ### Example Basket
 
@@ -25,50 +25,54 @@ Note: These example values reference the Example Basket shown above.
 
 Mandatory parameters are:
 
-* `CustomerId`
-* `TransactionId`
-* `Currency`
-* `Code`
+* `partnerId`
+* `transactionId`
+* `currency`
+* `code`
 
 | Parameter | Description | Data Type | Example |
 |---|---|---|---|
-| CustomerId | Your `CustomerId` as provided by UNiDAYS | String | 0LTio6iVNaKj861RM9azJQ== |
-| TransactionId | A unique ID for the transaction in your system | String | Order123 |
-| Currency | The ISO 4217 currency code | String | GBP |
-| OrderTotal | Total monetary amount paid, formatted to 2 decimal places | Decimal | 209.00 |
-| ItemsUNiDAYSDiscount | Total monetary amount of UNiDAYS discount applied on gross item value `ItemsGross`, formatted to 2 decimal places | Decimal | 13.00 |
-| Code | The UNiDAYS discount code used | String | ABC123 |
-| ItemsTax | Total monetary amount of tax applied to items, formatted to 2 decimal places | Decimal | 34.50
-| ShippingGross | Total monetary amount of shipping cost, before any shipping discount or tax applied, formatted to 2 decimal places | Decimal | 5.00 |
-| ShippingDiscount | Total monetary amount of shipping discount (UNiDAYS or otherwise) applied to the order, formatted to 2 decimal places | Decimal | 3.00 |
-| ItemsGross | Total monetary amount of the items, including tax, before any discounts are applied, formatted to 2 decimal places | Decimal | 230.00 |
-| ItemsOtherDiscount | Total monetary amount of all non UNiDAYS discounts applied to `ItemsGross`, formatted to 2 decimal places | Decimal | 10.00 |
+| partnerId | Your `partnerId` as provided by UNiDAYS | String | 0LTio6iVNaKj861RM9azJQ== |
+| transactionId | A unique ID for the transaction in your system | String | Order123 |
+| currency | The ISO 4217 currency code | String | GBP |
+| orderTotal | Total monetary amount paid, formatted to 2 decimal places | Decimal | 209.00 |
+| itemsUNiDAYSDiscount | Total monetary amount of UNiDAYS discount applied on gross item value `itemsGross`, formatted to 2 decimal places | Decimal | 13.00 |
+| code | The UNiDAYS discount code used | String | ABC123 |
+| itemsTax | Total monetary amount of tax applied to items, formatted to 2 decimal places | Decimal | 34.50
+| shippingGross | Total monetary amount of shipping cost, before any shipping discount or tax applied, formatted to 2 decimal places | Decimal | 5.00 |
+| shippingDiscount | Total monetary amount of shipping discount (UNiDAYS or otherwise) applied to the order, formatted to 2 decimal places | Decimal | 3.00 |
+| itemsGross | Total monetary amount of the items, including tax, before any discounts are applied, formatted to 2 decimal places | Decimal | 230.00 |
+| itemsOtherDiscount | Total monetary amount of all non UNiDAYS discounts applied to `itemsGross`, formatted to 2 decimal places | Decimal | 10.00 |
 | UNiDAYSDiscountPercentage | The UNiDAYS discount applied, as a percentage, formatted to 2 decimal places | Decimal | 10.00 |
-| NewCustomer | Is the user a new (vs returning) customer to you? | Boolean Integer | 0 or 1 |
+| newCustomer | Is the user a new (vs returning) customer to you? | Boolean Integer | 0 or 1 |
 
 These parameters must be appended to the query string or sent in the request entity of a POST request.
 
-## Example of `trackingRequest` usage
+## Example of `trackingScriptRequest` usage
 
 ```html
 <script type="text/javascript" src="unidays.js"></script>
 <script type="text/javascript">
     (function (window) {
-        // UNiDAYS will provide your customerId.
-        var customerId = '0LTio6iVNaKj861RM9azJQ==';
+        // UNiDAYS will provide your partnerId.
+        var partnerId = '0LTio6iVNaKj861RM9azJQ==';
 
-        // Create a reference to the UNiDAYS TrackingHelper object, passing in your customerId.
-        var unidays = new TrackingHelper(customerId);
+        // These must be based on the real values of the transaction.
+        var currency = 'GBP';
+        var transactionId = 'Order123';
+        var code = 'ABC123';
 
-        // Pass in the corresponding transaction details to the trackingRequest method.
-        unidays.trackingRequest('Order123', 'GBP', 209.00, 13.00, 'ABC123', 34.50,
-            5.00, 3.00, 230.00, 10.00, 10.00, 1);
+        // Create a reference to the UnidaysTracking object, passing in your partnerId, currency, transactionId and code.
+        var unidays = new UnidaysTracking(partnerId, currency, transactionId, code);
 
-        // The trackingRequest method has now built the request and called the UNiDAYS Tracking API.
+        // Pass in the remaining corresponding transaction details to the trackingScriptRequest method.
+        unidays.trackingScriptRequest(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, 1);
+
+        // The method has now built the request and called the UNiDAYS Tracking API.
     }(window));
 </script>
 ```
 
-Example of request generated by `trackingRequest`:
+Example of request generated by `trackingScriptRequest`:
 
-> `https://tracking.myunidays.com/perks/redemption/v1.2.js?CustomerId=0LTio6iVNaKj861RM9azJQ%3d%3d&TransactionId=Order123&MemberId=&Currency=GBP&OrderTotal=209.00&ItemsUNiDAYSDiscount=13.00&Code=ABC123&ItemsTax=34.50&ShippingGross=5.00&ShippingDiscount=3.00&ItemsGross=230.00&ItemsOtherDiscount=10.00&UNiDAYSDiscountPercentage=10.00&NewCustomer=1`
+> `"https://tracking.myunidays.com/v1.2/redemption/js?CustomerId=0LTio6iVNaKj861RM9azJQ%3d%3d&TransactionId=Order123&MemberId=&Currency=GBP&OrderTotal=209.00&ItemsUNiDAYSDiscount=13.00&Code=ABC123&ItemsTax=34.50&ShippingGross=5.00&ShippingDiscount=3.00&ItemsGross=230.00&ItemsOtherDiscount=10.00&UNiDAYSDiscountPercentage=10.00&NewCustomer=1`
