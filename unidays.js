@@ -6,8 +6,7 @@ function UnidaysTracking(customerId) {
 	if (!this.customerId)
 		throw "customerId is required and cannot be empty";
 
-	this.trackingUrl = "https://tracking.myunidays.com/perks/redemption/v1.1.js";
-	//var trackingUrl = "https://tracking.myunidays.com/perks/redemption/v1.1-test.js";
+	this.trackingUrl = "https://tracking.myunidays.com/v1.2/redemption";
 
 	this._parseCustomerId = function(customerId) {
 		return (customerId != null ? this._encode(customerId) : '');
