@@ -23,27 +23,23 @@ function UnidaysTracking(partnerId, currency, transactionId, code, test) {
     this.trackingScriptUrl = this.trackingUrl + '/js';
     this.trackingPixelUrl = this.trackingUrl + '/gif';
 
-    this._validateString = function (string) {
-        return encodeURIComponent(string)
-    };
-
     this._validateNumber = function (number, decimalPlaces) {
         return (Math.round(number * 100) / 100).toFixed(decimalPlaces);
     };
 
-    this._generateQuery = function (partnerId, transactionId, currency, orderTotal, itemsUNiDAYSDiscount, code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer) {
-        return '?PartnerId=' + this._validateString(partnerId) +
-            '&TransactionId=' + this._validateString(transactionId) +
-            '&Currency=' + this._validateString(currency) +
+    this._generateQuery = function (partnerId, transactionId, currency, orderTotal, itemsUnidaysDiscount, code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, discountPercentage, newCustomer) {
+        return '?PartnerId=' + encodeURIComponent(partnerId) +
+            '&TransactionId=' + encodeURIComponent(transactionId) +
+            '&Currency=' + encodeURIComponent(currency) +
             (orderTotal ? '&OrderTotal=' + this._validateNumber(orderTotal, 2) : '') +
-            (itemsUNiDAYSDiscount ? '&ItemsUNiDAYSDiscount=' + this._validateNumber(itemsUNiDAYSDiscount, 2) : '') +
-            '&Code=' + this._validateString(code) +
+            (itemsUnidaysDiscount ? '&ItemsUNiDAYSDiscount=' + this._validateNumber(itemsUnidaysDiscount, 2) : '') +
+            '&Code=' + encodeURIComponent(code) +
             (itemsTax ? '&ItemsTax=' + this._validateNumber(itemsTax, 2) : '') +
             (shippingGross ? '&ShippingGross=' + this._validateNumber(shippingGross, 2) : '') +
             (shippingDiscount ? '&ShippingDiscount=' + this._validateNumber(shippingDiscount, 2) : '') +
             (itemsGross ? '&ItemsGross=' + this._validateNumber(itemsGross, 2) : '') +
             (itemsOtherDiscount ? '&ItemsOtherDiscount=' + this._validateNumber(itemsOtherDiscount, 2) : '') +
-            (UNiDAYSDiscountPercentage ? '&UNiDAYSDiscountPercentage=' + this._validateNumber(UNiDAYSDiscountPercentage, 2) : '') +
+            (discountPercentage ? '&UNiDAYSDiscountPercentage=' + this._validateNumber(discountPercentage, 2) : '') +
             (newCustomer ? '&NewCustomer=' + this._validateNumber(newCustomer, 0) : '') +
             (this.test ? "&Test=True" : '');
     };
@@ -58,27 +54,27 @@ function UnidaysTracking(partnerId, currency, transactionId, code, test) {
         })(document, url);
     }
 
-    this.createScriptUrl = function (orderTotal, itemsUNiDAYSDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer) {
-        var query = this._generateQuery(this.partnerId, this.transactionId, this.currency, orderTotal, itemsUNiDAYSDiscount, this.code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer);
+    this.createScriptUrl = function (orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer) {
+        var query = this._generateQuery(this.partnerId, this.transactionId, this.currency, orderTotal, itemsUnidaysDiscount, this.code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer);
 
         return this.trackingScriptUrl + query;
     }
 
-    this.createPixelUrl = function (orderTotal, itemsUNiDAYSDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer) {
-        var query = this._generateQuery(this.partnerId, this.transactionId, this.currency, orderTotal, itemsUNiDAYSDiscount, this.code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer);
+    this.createPixelUrl = function (orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer) {
+        var query = this._generateQuery(this.partnerId, this.transactionId, this.currency, orderTotal, itemsUnidaysDiscount, this.code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer);
 
         return this.trackingPixelUrl + query;
     }
 
-    this.trackingScriptRequest = function (orderTotal, itemsUNiDAYSDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer) {
-        var query = this._generateQuery(this.partnerId, this.transactionId, this.currency, orderTotal, itemsUNiDAYSDiscount, this.code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer);
+    this.trackingScriptRequest = function (orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer) {
+        var query = this._generateQuery(this.partnerId, this.transactionId, this.currency, orderTotal, itemsUnidaysDiscount, this.code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer);
         var url = this.trackingScriptUrl + query;
 
         this._makeRequest(url, 'script');
     }
 
-    this.trackingPixelRequest = function (orderTotal, itemsUNiDAYSDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer) {
-        var query = this._generateQuery(this.partnerId, this.transactionId, this.currency, orderTotal, itemsUNiDAYSDiscount, this.code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, UNiDAYSDiscountPercentage, newCustomer);
+    this.trackingPixelRequest = function (orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer) {
+        var query = this._generateQuery(this.partnerId, this.transactionId, this.currency, orderTotal, itemsUnidaysDiscount, this.code, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer);
         var url = this.trackingPixelUrl + query;
 
         this._makeRequest(url, 'img');
