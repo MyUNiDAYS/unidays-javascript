@@ -33,7 +33,7 @@ This is the JavaScript library for UNiDAYS direct tracking. This is to be used f
 
 This project is set up as an open source project. As such, if there any any suggestions you have for features, for improving the code itself or come across any problems, you can raise them and / or suggest changes in implementation.
 
-If you are interested in contributing to this codebase, please follow the [contributing guidelines](./GUIDELINES/contributing.md). This contains guides on both contributing directly and raising feature requests or bug reports. Please adhere to our [code of conduct](./CODE_OF_CONDUCT.md) when doing any of the above.
+If you are interested in contributing to this codebase, please follow the [contributing guidelines](./contributing.md). This contains guides on both contributing directly and raising feature requests or bug reports. Please adhere to our [code of conduct](./CODE_OF_CONDUCT.md) when doing any of the above.
 
 ## Parameters
 
