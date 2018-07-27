@@ -21,9 +21,12 @@ This is the JavaScript library for UNiDAYS direct tracking. This is to be used f
     - [Tracking Pixel Request _(performs the web request asynchronously within an image element)_](#tracking-pixel-request)
     - [Test endpoint](#test-endpoint)
 
+- [Unit Tests](#unit-tests)
+
 ## How to use this code
 
-- Download/clone `unidays.js` and include this on the post-payment/order-success page of your web project.
+- Download the contents of `dist/`, choosing between a regular or minified version of the script.
+- Include this on the post-payment/order-success page of your web project.
 - See the example usage section for the type of call you intend to use. Each of these contains an example.
 
 ## Contributing
@@ -47,7 +50,7 @@ Here is a description of all the available parameters. Which of these you provid
 
 ### Optional parameters
 
-Note any of the following properties to which the value is unknown should be omitted from calls (assigned `null`). Which of the following values you provide to us will depend on your agreed contract.
+Note any of the following properties to which the value is unknown should be omitted from calls (assign `null`). Which of the following values you provide to us will depend on your agreed contract.
 
 | Parameter | Description | Data Type | Example |
 |---|---|---|---|
@@ -252,6 +255,10 @@ A URL will be created and called for you within an image element; the UNIDAYS AP
 
 UNiDAYS provide a test-endpoint configuration of the `UnidaysTracking` object.
 
+#### Return
+
+The UnidaysTracking object, configured in test mode, will add an extra parameter (`&Test=True`) to the URL that is returned to you, or sent for you.
+
 #### Example
 
 ```html
@@ -278,16 +285,18 @@ UNiDAYS provide a test-endpoint configuration of the `UnidaysTracking` object.
 </script>
 ```
 
-The UnidaysTracking object, configured in test mode, will add an extra parameter (`&Test=True`) to the URL that is returned to you, or sent for you.
-> `"https://tracking.myunidays.com/v1.2/redemption/js?CustomerId=0LTio6iVNaKj861RM9azJQ%3d%3d&TransactionId=Order123&MemberId=&Currency=GBP&OrderTotal=209.00&ItemsUNiDAYSDiscount=13.00&Code=ABC123&ItemsTax=34.50&ShippingGross=5.00&ShippingDiscount=3.00&ItemsGross=230.00&ItemsOtherDiscount=10.00&UNiDAYSDiscountPercentage=10.00&NewCustomer=1`
+## Unit Tests
 
+We use [Jest](https://jestjs.io/) for our Unit Tests
 
-## Installation and Running Tests
+### Installation
 
-We use Jest for our Unit Tests. To install run
+To install:
 
-`npm install`
+- Run `npm install`
 
-Then to run the tests either use your favourite editor or run `jest` from the command line.
+### Running the tests
 
-Upon doing a pull request be sure to run `npm run pack`. This will copy the `src/unidays.js` file to `dist` and generate a `unidays.min.js` file ready for publishing.
+To run the tests:
+
+- Run `npm test` from your favourite terminal

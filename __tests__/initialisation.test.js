@@ -1,4 +1,4 @@
-const unidaysTracking = require('../unidays');
+const unidaysTracking = require('../src/unidays');
 
 describe('When the unidaysTracking method is called', () => {
 	let tracking;

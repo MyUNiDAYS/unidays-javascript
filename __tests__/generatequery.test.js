@@ -1,5 +1,4 @@
-const unidaysTracking = require('../unidays');
-
+const unidaysTracking = require('../src/unidays');
 
 describe('When calling generateQuery', () => {
 
