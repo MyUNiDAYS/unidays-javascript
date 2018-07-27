@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="/assets/UNiDAYS_Logo.png" />
+</p>
+<br/>
+
 # UNiDAYS Contributors Guide.
 
 :star: Thanks for taking the time to contribute :star:
