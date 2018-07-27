@@ -1,0 +1,28 @@
+{
+  "name": "unidays-javascript",
+  "version": "1.0.0",
+  "description": "The request must contain several parameters relating to the discount/promotion redemption, including your UNiDAYS `CustomerId` and a unique `TransactionId` to identify the transaction in your system (for debugging purposes).",
+  "main": "unidays.js",
+  "scripts": {
+    "test": "jest",
+    "pack": "cpx \"src/unidays.js\" dist && uglifyjs src/unidays.js -o dist/unidays.min.js --compress --mangle"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MyUNiDAYS/unidays-javascript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MyUNiDAYS/unidays-javascript/issues"
+  },
+  "homepage": "https://github.com/MyUNiDAYS/unidays-javascript#readme",
+  "dependencies": {
+    "cpx": "^1.5.0",
+    "jest": "^23.4.1",
+    "uglify-js": "^3.4.5"
+  },
+  "jest": {
+    "verbose": true
+  }
+}
