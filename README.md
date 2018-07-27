@@ -270,7 +270,7 @@ UNiDAYS provide a test-endpoint configuration of the `UnidaysTracking` object.
         // Create a reference to the UnidaysTracking object, passing an additional argument of true to instantiate in test mode.
         var unidays = new UnidaysTracking(partnerId, currency, transactionId, code, true);
 
-        // Pass in the remaining corresponding transaction details to the trackingPixelRequest method.
+        // Pass in the remaining corresponding transaction details to the createScriptUrl method.
         unidays.createScriptUrl(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, 1);
 
         // You now have a script URL which can be used to test your implementation.
