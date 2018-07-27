@@ -279,3 +279,14 @@ UNiDAYS provide a test-endpoint configuration of the `UnidaysTracking` object.
 ```
 
 The UnidaysTracking object, configured in test mode, will add an extra parameter (`&Test=True`) to the URL that is returned to you, or sent for you.
+> `"https://tracking.myunidays.com/v1.2/redemption/js?CustomerId=0LTio6iVNaKj861RM9azJQ%3d%3d&TransactionId=Order123&MemberId=&Currency=GBP&OrderTotal=209.00&ItemsUNiDAYSDiscount=13.00&Code=ABC123&ItemsTax=34.50&ShippingGross=5.00&ShippingDiscount=3.00&ItemsGross=230.00&ItemsOtherDiscount=10.00&UNiDAYSDiscountPercentage=10.00&NewCustomer=1`
+
+
+## Installation and Running Tests
+
+We use Jest for our Unit Tests. To install run
+
+`npm install`
+
+Then to run the tests either use your favourite editor or run `jest` from the command line.
+
