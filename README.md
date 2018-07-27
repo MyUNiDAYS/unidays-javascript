@@ -290,3 +290,4 @@ We use Jest for our Unit Tests. To install run
 
 Then to run the tests either use your favourite editor or run `jest` from the command line.
 
+Upon doing a pull request be sure to run `npm run pack`. This will copy the `src/unidays.js` file to `dist` and generate a `unidays.min.js` file ready for publishing.
