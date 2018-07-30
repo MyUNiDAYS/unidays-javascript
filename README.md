@@ -3,6 +3,8 @@
 </p>
 <br/>
 
+[![Build status](https://ci.appveyor.com/api/projects/status/xjfdbra2ea85qd27?svg=true)](https://ci.appveyor.com/project/UNiDAYS/unidays-javascript)
+
 # UNiDAYS JavaScript Direct Tracking
 
 This is the JavaScript library for UNiDAYS direct tracking. This is to be used for coded integrations. The following documentation provides descriptions of the implementations and examples.
