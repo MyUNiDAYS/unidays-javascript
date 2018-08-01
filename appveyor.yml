@@ -29,7 +29,7 @@
     - ps: Update-AppveyorBuild -Version "$($env:appveyor_build_version)-fail-$(Get-Date -format dd_mm_yyyy_HH_mm_ss)"
 
   on_success:
-    - npm publish --access restricted
+    - npm publish --access public
 
 # all branches except master
 -
