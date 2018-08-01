@@ -59,7 +59,7 @@ branches:
   on_success:
     - npm publish --access restricted
 
-# everything except master
+# all branches except master
 -
   branches:
     except:
