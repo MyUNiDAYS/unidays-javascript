@@ -125,10 +125,6 @@ A URL will be returned to you, which can then be used to call the UNiDAYS Tracki
 </script>
 ```
 
-### Create Pixel URL
-
-This is known as our pixel-to-server integration
-
 ### Tracking Script Request
 
 This will create the client-script URL and perform the request to the UNiDAYS Tracking API for you.
