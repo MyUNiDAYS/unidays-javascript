@@ -1,7 +1,7 @@
 {
   "name": "unidays-javascript",
   "version": "1.0.0",
-  "description": "The request must contain several parameters relating to the discount/promotion redemption, including your UNiDAYS `CustomerId` and a unique `TransactionId` to identify the transaction in your system (for debugging purposes).",
+  "description": "This is the JavaScript library for integrating with UNiDAYS. This is to be used for coded integrations.",
   "main": "unidays.js",
   "scripts": {
     "test": "jest",
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/MyUNiDAYS/unidays-javascript.git"
   },
-  "author": "",
+  "author": "dev.api@myunidays.com",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/MyUNiDAYS/unidays-javascript/issues"
