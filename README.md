@@ -4,6 +4,7 @@
 <br/>
 
 [![Build status](https://ci.appveyor.com/api/projects/status/xjfdbra2ea85qd27/branch/master?svg=true)](https://ci.appveyor.com/project/UNiDAYS/unidays-javascript/branch/master)
+[![npm version](https://badge.fury.io/js/unidays-javascript.svg)](https://badge.fury.io/js/unidays-javascript)
 
 # UNiDAYS JavaScript Library
 

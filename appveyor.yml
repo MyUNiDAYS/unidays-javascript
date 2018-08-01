@@ -6,7 +6,7 @@
       
   skip_tags: true
 
-  version: 1.0.1
+  version: 1.0.2
    
   init:
     - git config --global core.autocrlf true
@@ -23,7 +23,8 @@
   build_script:
     - npm pack
     
-  test: off
+  test_script:
+    - npm test
    
   on_failure:
     - ps: Update-AppveyorBuild -Version "$($env:appveyor_build_version)-fail-$(Get-Date -format dd_mm_yyyy_HH_mm_ss)"
