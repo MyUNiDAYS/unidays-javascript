@@ -1,28 +1,3 @@
-
-#------ tests configuration ------#
-environment:
-  matrix:
-    - nodejs_version: '8'
-    - nodejs_version: '6'
-install:
-  - npm install
-  - ps: '"//registry.npmjs.org/:_authToken=$env:npm_token`n" | out-file "$env:userprofile\.npmrc" -Encoding ASCII'
-  - npm whoami
-test_script:
-  - npm test
-build: off
-#---- deployment configuration ----#
-
-branches:
-  only:
-    - master
-    deploy:
-  - npm pack
-  - npm publish
-    on:
-      branch: master
-
-
 # master
 -
   branches:
@@ -31,22 +6,22 @@ branches:
       
   skip_tags: true
 
-  version: 1.0.{build}-{branch}
+  version: 1.0.{build}
    
   init:
     - git config --global core.autocrlf true
   
   environment:
-  matrix:
-    - nodejs_version: '8'
+    matrix:
+      - nodejs_version: '8'
   
   install:
     - npm install
-    - ps: '"//registry.npmjs.org/:_authToken=$env:npm_auth_token`n" | out-file "$env:userprofile\.npmrc" -Encoding ASCII'
+    - ps: '"//registry.npmjs.org/:_authToken=$env:npm_token`n" | out-file "$env:userprofile\.npmrc" -Encoding ASCII'
     - npm whoami
 
   build_script:
-    - npm run build
+    - npm pack
     
   test: off
 
@@ -67,23 +42,23 @@ branches:
       
   skip_tags: true
 
-  version: 0.12.2.{build}-{branch}
+  version: 1.0.{build}-{branch}
    
   init:
     - git config --global core.autocrlf input
   
   environment:
-  matrix:
-    - nodejs_version: '8'
-    - nodejs_version: '6'
+    matrix:
+       - nodejs_version: '8'
+       - nodejs_version: '6'
 
   install:
     - npm install
-    - ps: '"//registry.npmjs.org/:_authToken=$env:npm_auth_token`n" | out-file "$env:userprofile\.npmrc" -Encoding ASCII'
+    - ps: '"//registry.npmjs.org/:_authToken=$env:npm_token`n" | out-file "$env:userprofile\.npmrc" -Encoding ASCII'
     - npm whoami
 
   build_script:
-    - npm run build
+    - npm pack
     
   test_script:
     - npm test
