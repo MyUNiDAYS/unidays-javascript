@@ -3,16 +3,17 @@
 </p>
 <br/>
 
-[![Build status](https://ci.appveyor.com/api/projects/status/xjfdbra2ea85qd27?svg=true)](https://ci.appveyor.com/project/UNiDAYS/unidays-javascript)
+[![Build status](https://ci.appveyor.com/api/projects/status/xjfdbra2ea85qd27/branch/master?svg=true)](https://ci.appveyor.com/project/UNiDAYS/unidays-javascript/branch/master)
 
-# UNiDAYS JavaScript Direct Tracking
+# UNiDAYS JavaScript Library
 
-This is the JavaScript library for UNiDAYS direct tracking. This is to be used for coded integrations. The following documentation provides descriptions of the implementations and examples.
+This is the JavaScript library for integrating with UNiDAYS. This is to be used for coded integrations. The following documentation provides descriptions of the implementations and examples.
 
 ## Contents
 
 [**How to use this code?**](#how-to-use-this-code)
 
+[**Direct Tracking**](#direct-tracking)
 - [Parameters](#parameters)
     - [Example Basket](#example-basket)
 
@@ -30,6 +31,8 @@ This is the JavaScript library for UNiDAYS direct tracking. This is to be used f
 - Download the contents of `dist/`, choosing between a regular or minified version of the script.
 - Include this on the post-payment/order-success page of your web project.
 - See the example usage section for the type of call you intend to use. Each of these contains an example.
+
+## Direct Tracking
 
 ## Parameters
 
