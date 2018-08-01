@@ -19,9 +19,7 @@ function UnidaysTracking(partnerId, currency, transactionId, code, test) {
     if (!this.code)
         throw 'code is required and cannot be empty';
 
-    this.trackingUrl = 'https://tracking.myunidays.com/v1.2/redemption';
-    this.trackingScriptUrl = this.trackingUrl + '/js';
-    this.trackingPixelUrl = this.trackingUrl + '/gif';
+    this.trackingScriptUrl = 'https://tracking.myunidays.com/v1.2/redemption/js';
 
     this._validateNumber = function (number, decimalPlaces) {
         return (Math.round(number * 100) / 100).toFixed(decimalPlaces);
@@ -60,24 +58,11 @@ function UnidaysTracking(partnerId, currency, transactionId, code, test) {
         return this.trackingScriptUrl + query;
     }
 
-    this.createPixelUrl = function (orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer) {
-        var query = this._generateQuery(orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer);
-
-        return this.trackingPixelUrl + query;
-    }
-
     this.trackingScriptRequest = function (orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer) {
         var query = this._generateQuery(orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer);
         var url = this.trackingScriptUrl + query;
 
         this._makeRequest(url, 'script');
-    }
-
-    this.trackingPixelRequest = function (orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer) {
-        var query = this._generateQuery(orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer);
-        var url = this.trackingPixelUrl + query;
-
-        this._makeRequest(url, 'img');
     }
 }
 

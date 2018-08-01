@@ -11,31 +11,25 @@ This is the JavaScript library for UNiDAYS direct tracking. This is to be used f
 
 ## Contents
 
-- [How to use this code?](#how-to-use-this-code)
-- [Contributing](#contributing)
+[**How to use this code?**](#how-to-use-this-code)
+
 - [Parameters](#parameters)
     - [Example Basket](#example-basket)
 
 - [Example Usage](#example-usage)
     - [Create Script URL _(returns url for use in a script element)_](#create-script-url)
-    - [Create Pixel URL _(returns url for use in an image element)_](#create-pixel-url)
     - [Tracking Script Request _(performs the web request asynchronously within a script element)_](#tracking-script-request)
-    - [Tracking Pixel Request _(performs the web request asynchronously within an image element)_](#tracking-pixel-request)
     - [Test endpoint](#test-endpoint)
 
-- [Unit Tests](#unit-tests)
+[Unit Tests](#unit-tests)
+
+[**Contributing**](#contributing)
 
 ## How to use this code
 
 - Download the contents of `dist/`, choosing between a regular or minified version of the script.
 - Include this on the post-payment/order-success page of your web project.
 - See the example usage section for the type of call you intend to use. Each of these contains an example.
-
-## Contributing
-
-This project is set up as an open source project. As such, if there any any suggestions you have for features, for improving the code itself or come across any problems, you can raise them and / or suggest changes in implementation.
-
-If you are interested in contributing to this codebase, please follow the [contributing guidelines](./GUIDELINES/contributing.md). This contains guides on both contributing directly and raising feature requests or bug reports. Please adhere to our [code of conduct](./CODE_OF_CONDUCT.md) when doing any of the above.
 
 ## Parameters
 
@@ -45,7 +39,7 @@ Here is a description of all the available parameters. Which of these you provid
 
 | Parameter | Description | Data Type | Example |
 |---|---|---|---|
-| partnerId | Your PartnerId as provided by UNiDAYS. If you operate in multiple geographic regions you MAY have a different PartnerId for each region | String | 0LTio6iVNaKj861RM9azJQ== |
+| partnerId | Your PartnerId as provided by UNiDAYS. If you operate in multiple geographic regions you _may_ have a different PartnerId for each region | String | 0LTio6iVNaKj861RM9azJQ== |
 | transactionId | A unique ID for the transaction in your system | String | Order123 |
 | currency | The ISO 4217 currency code | String | GBP |
 | code | The UNiDAYS discount code used | String | ABC123 |
@@ -88,9 +82,7 @@ Here is an example basket with the fields relating to UNiDAYS tracking parameter
 Below are examples of implementing the different types of integrations. These examples cover coded integrations and include all optional parameters. They are intended as a guideline for implementation.
 
 - [Create Script URL _(returns url for use in a script element)_](#create-script-url)
-- [Create Pixel URL _(returns url for use in an image element)_](#create-pixel-url)
 - [Tracking Script Request _(performs the web request asynchronously within a script element)_](#tracking-script-request)
-- [Tracking Pixel Request _(performs the web request asynchronously within an image element)_](#tracking-pixel-request)
 - [Test endpoint](#test-endpoint)
 
 ### Create Script URL
@@ -137,42 +129,6 @@ A URL will be returned to you, which can then be used to call the UNiDAYS Tracki
 
 This is known as our pixel-to-server integration
 
-#### Making the call
-
-The method to get the URL to make a pixel-to-server request with is `createPixelUrl(args...)`. To implement this method you first need to ensure that you have access to all required transaction details.
-
-Once you have access to this transaction information, create a UnidaysTracking object, providing the mandatory parameters as arguments (`UnidaysTracking(partnerId, currency, transactionId, code)`) and call `.createPixelUrl(args...)` where the `args` are the transaction details you are required to send to the UNiDAYS Tracking API.
-
-#### Return
-
-A URL will be returned to you, which can then be used to call the UNiDAYS Tracking API.
-
-#### Example
-
-```html
-<script type="text/javascript" src="unidays.js"></script>
-
-<script type="text/javascript">
-    (function (window) {
-        // UNiDAYS will provide your partnerId.
-        var partnerId = '0LTio6iVNaKj861RM9azJQ==';
-
-        // These must be based on the real values of the transaction.
-        var currency = 'GBP';
-        var transactionId = 'Order123';
-        var code = 'ABC123';
-
-        // Create a reference to the UnidaysTracking object, passing in your partnerId, currency, transactionId and code.
-        var unidays = new UnidaysTracking(partnerId, currency, transactionId, code);
-
-        // Pass in the remaining corresponding transaction details to the createPixelUrl method.
-        var url = unidays.createPixelUrl(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, 1);
-
-        // You now have a URL which can be used in an image element to call the API.
-    }(window));
-</script>
-```
-
 ### Tracking Script Request
 
 This will create the client-script URL and perform the request to the UNiDAYS Tracking API for you.
@@ -209,46 +165,6 @@ A URL will be created and called for you within a script element
         unidays.trackingScriptRequest(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, 1);
 
         // The method has built the request and performed a request to our API within a script element.
-    }(window));
-</script>
-```
-
-### Tracking Pixel Request
-
-This will create the pixel URL and perform the request to the UNiDAYS Tracking API for you.
-
-#### Making the call
-
-The method to call the API with a pixel request is `trackingPixelRequest(args...)`. To implement this method you first need to ensure that you have access to all required transaction details.
-
-Once you have access to this transaction information, create a UnidaysTracking object, providing the mandatory parameters as arguments (`UnidaysTracking(partnerId, currency, transactionId, code)`) and call `.trackingPixelRequest(args...)` where the `args` are the transaction details you are required to send to the UNiDAYS Tracking API.
-
-#### Return
-
-A URL will be created and called for you within an image element; the UNIDAYS API will always respond with a 1x1 transparent GIF.
-
-#### Example
-
-```html
-<script type="text/javascript" src="unidays.js"></script>
-
-<script type="text/javascript">
-    (function (window) {
-        // UNiDAYS will provide your partnerId.
-        var partnerId = '0LTio6iVNaKj861RM9azJQ==';
-
-        // These must be based on the real values of the transaction.
-        var currency = 'GBP';
-        var transactionId = 'Order123';
-        var code = 'ABC123';
-
-        // Create a reference to the UnidaysTracking object, passing in your partnerId, currency, transactionId and code.
-        var unidays = new UnidaysTracking(partnerId, currency, transactionId, code);
-
-        // Pass in the remaining corresponding transaction details to the trackingPixelRequest method.
-        unidays.trackingPixelRequest(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, 1);
-
-        // The method has built the request and performed a request to our API within an image element.
     }(window));
 </script>
 ```
@@ -293,12 +209,14 @@ We use [Jest](https://jestjs.io/) for our Unit Tests
 
 ### Installation
 
-To install:
-
-- Run `npm install`
+To install, run `npm install` from your favourite terminal.
 
 ### Running the tests
 
-To run the tests:
+To run the tests, run `npm test` from your favourite terminal.
 
-- Run `npm test` from your favourite terminal
+## Contributing
+
+This project is set up as an open source project. As such, if there any any suggestions you have for features, for improving the code itself or come across any problems, you can raise them and / or suggest changes in implementation.
+
+If you are interested in contributing to this codebase, please follow the [contributing guidelines](./.github/contributing.md). This contains guides on both contributing directly and raising feature requests or bug reports. Please adhere to our [code of conduct](./CODE_OF_CONDUCT.md) when doing any of the above.
