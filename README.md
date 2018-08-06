@@ -63,7 +63,7 @@ Note any of the following properties to which the value is unknown should be omi
 | itemsGross | Total monetary amount of the items, including tax, before any discounts are applied, formatted to 2 decimal places | Decimal | 230.00 |
 | itemsOtherDiscount | Total monetary amount of all non UNiDAYS discounts applied to `itemsGross`, formatted to 2 decimal places | Decimal | 10.00 |
 | unidaysDiscountPercentage | The UNiDAYS discount applied, as a percentage, formatted to 2 decimal places | Decimal | 10.00 |
-| newCustomer | Is the user a new (vs returning) customer to you? | Boolean integer | 1 or 0 |
+| newCustomer | Is the user a new (vs returning) customer to you? | Boolean | true or false |
 
 ### Example Basket
 
