@@ -49,7 +49,7 @@ Here is a description of all the available parameters. Which of these you provid
 | currency | The ISO 4217 currency code | String | GBP |
 | code | The UNiDAYS discount code used | String | ABC123 |
 
-### Optional parameters
+### Additional parameters
 
 Note any of the following properties to which the value is unknown should be omitted from calls (assign `null`). Which of the following values you provide to us will depend on your agreed contract.
 
