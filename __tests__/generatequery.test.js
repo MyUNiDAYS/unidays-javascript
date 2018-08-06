@@ -10,9 +10,9 @@ describe('When calling generateQuery', () => {
 		});
 
 		test('With all parameters set - The query should contain the corresponding parameters', () => {
-			let query = tracking._generateQuery(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, 1);
+			let query = tracking._generateQuery(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, true);
 
-			expect(query).toBe('?PartnerId=0LTio6iVNaKj861RM9azJQ%3D%3D&TransactionId=Order123&Currency=GBP&OrderTotal=209.00&ItemsUNiDAYSDiscount=13.00&Code=ABC123&ItemsTax=34.50&ShippingGross=5.00&ShippingDiscount=3.00&ItemsGross=230.00&ItemsOtherDiscount=10.00&UNiDAYSDiscountPercentage=10.00&NewCustomer=1');
+			expect(query).toBe('?PartnerId=0LTio6iVNaKj861RM9azJQ%3D%3D&TransactionId=Order123&Currency=GBP&OrderTotal=209.00&ItemsUNiDAYSDiscount=13.00&Code=ABC123&ItemsTax=34.50&ShippingGross=5.00&ShippingDiscount=3.00&ItemsGross=230.00&ItemsOtherDiscount=10.00&UNiDAYSDiscountPercentage=10.00&NewCustomer=True');
 		});
 
 		test('With some parameters set - The query should contain the corresponding parameters', () => {
@@ -30,9 +30,9 @@ describe('When calling generateQuery', () => {
 		});
 
 		test('With all parameters set - The query should contain the corresponding parameters with test mode', () => {
-			let query = tracking._generateQuery(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, 1);
+			let query = tracking._generateQuery(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, false);
 
-			expect(query).toBe('?PartnerId=0LTio6iVNaKj861RM9azJQ%3D%3D&TransactionId=Order123&Currency=GBP&OrderTotal=209.00&ItemsUNiDAYSDiscount=13.00&Code=ABC123&ItemsTax=34.50&ShippingGross=5.00&ShippingDiscount=3.00&ItemsGross=230.00&ItemsOtherDiscount=10.00&UNiDAYSDiscountPercentage=10.00&NewCustomer=1&Test=True');
+			expect(query).toBe('?PartnerId=0LTio6iVNaKj861RM9azJQ%3D%3D&TransactionId=Order123&Currency=GBP&OrderTotal=209.00&ItemsUNiDAYSDiscount=13.00&Code=ABC123&ItemsTax=34.50&ShippingGross=5.00&ShippingDiscount=3.00&ItemsGross=230.00&ItemsOtherDiscount=10.00&UNiDAYSDiscountPercentage=10.00&NewCustomer=False&Test=True');
 		});
 
 		test('With some parameters set - The query should contain the corresponding parameters with test mode', () => {

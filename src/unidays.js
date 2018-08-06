@@ -25,6 +25,13 @@ function UnidaysTracking(partnerId, currency, transactionId, code, test) {
         return (Math.round(number * 100) / 100).toFixed(decimalPlaces);
     };
 
+    this._validateBoolean = function (newCustomer) {
+       if(typeof(newCustomer) === 'boolean')
+         if(newCustomer == true) return 'True';
+         else return 'False';
+       return '';
+    };
+
     this._generateQuery = function (orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross, shippingDiscount, itemsGross, itemsOtherDiscount, discountPercentage, newCustomer) {
         return '?PartnerId=' + encodeURIComponent(this.partnerId) +
             '&TransactionId=' + encodeURIComponent(this.transactionId) +
@@ -38,7 +45,7 @@ function UnidaysTracking(partnerId, currency, transactionId, code, test) {
             (itemsGross ? '&ItemsGross=' + this._validateNumber(itemsGross, 2) : '') +
             (itemsOtherDiscount ? '&ItemsOtherDiscount=' + this._validateNumber(itemsOtherDiscount, 2) : '') +
             (discountPercentage ? '&UNiDAYSDiscountPercentage=' + this._validateNumber(discountPercentage, 2) : '') +
-            (newCustomer ? '&NewCustomer=' + this._validateNumber(newCustomer, 0) : '') +
+            (typeof(newCustomer) == 'boolean' ? '&NewCustomer=' + this._validateBoolean(newCustomer) : '') +
             (this.test ? "&Test=True" : '');
     };
 
