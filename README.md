@@ -38,7 +38,7 @@ This is the JavaScript library for integrating with UNiDAYS. This is to be used 
 
 ## Parameters
 
-Here is a description of all available parameters. Which of these you provide are dependant on the agreed contract.
+Here is a description of all available parameters. Which of these you provide are dependent on the agreed contract.
 
 ### Mandatory parameters
 
@@ -98,7 +98,7 @@ This is known as our client-script to server integration
 
 The method to get the URL to make a client-to-server request with is `createScriptUrl(args...)`. To implement this method, you first need to ensure that you have access to all required transaction details.
 
-Once you have access to this transaction information, create a UnidaysTracking object, providing the mandatory parameters as arguments `new UnidaysTracking(partnerId, currency, transactionId, code)` and call `.createScriptUrl(args...)`, where the `args` are the transaction details you are required to send to UNiDAYS.
+Once you have access to this transaction information, create a UnidaysTracking object, providing the [mandatory parameters](#mandatory-parameters) as arguments `new UnidaysTracking(partnerId, currency, transactionId, code)` and call `.createScriptUrl(args...)`, where the `args` are the transaction details you have contractually agreed to send to UNiDAYS.
 
 #### Return
 
@@ -138,7 +138,7 @@ This will create the client-script URL and perform the request to the UNiDAYS Tr
 
 The method to call the API with a client-script request is `trackingScriptRequest(args...)`. To implement this method, you first need to ensure that you have access to all required transaction details.
 
-Once you have access to this transaction information, create a UnidaysTracking object, providing the mandatory parameters as arguments `new UnidaysTracking(partnerId, currency, transactionId, code)` and call `.trackingScriptRequest(args...)`, where the `args` are the transaction details you are required to send to UNiDAYS.
+Once you have access to this transaction information, create a UnidaysTracking object, providing the mandatory parameters as arguments `new UnidaysTracking(partnerId, currency, transactionId, code)` and call `.trackingScriptRequest(args...)`, where the `args` are the transaction details you have contractually agreed to send to UNiDAYS.
 
 #### Return
 
