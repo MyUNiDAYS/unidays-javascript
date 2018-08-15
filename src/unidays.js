@@ -19,7 +19,7 @@ function UnidaysTracking(partnerId, currency, transactionId, code, test) {
     if (!this.code)
         throw 'code is required and cannot be empty';
 
-    this.trackingScriptUrl = 'https://tracking.myunidays.com/v1.2/redemption/js';
+    this.trackingScriptUrl = 'https://api.myunidays.com/tracking/v1.2/redemption/js';
 
     this._validateNumber = function (number, decimalPlaces) {
         return (Math.round(number * 100) / 100).toFixed(decimalPlaces);
