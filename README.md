@@ -3,7 +3,7 @@
 </p>
 <br/>
 
-[![Build status](https://ci.appveyor.com/api/projects/status/xjfdbra2ea85qd27/branch/master?svg=true)](https://ci.appveyor.com/project/UNiDAYS/unidays-javascript/branch/master)
+[![Build Status](https://travis-ci.org/MyUNiDAYS/unidays-javascript.svg?branch=master)](https://travis-ci.org/MyUNiDAYS/unidays-javascript)
 [![npm version](https://badge.fury.io/js/unidays-javascript.svg)](https://badge.fury.io/js/unidays-javascript)
 
 # UNiDAYS JavaScript Library
@@ -30,28 +30,28 @@ This is the JavaScript library for integrating with UNiDAYS. This is to be used 
 ## How to use this code
 
 - Download the contents of `dist/`, choosing between a regular or minified version of the script.
+- _Alternatively_, pull the package from [npm](https://www.npmjs.com/package/unidays-javascript), choosing between a regular of minified version of the script within the created modules directory.
 - Include this on the post-payment/order-success page of your web project.
 - See the example usage section for the type of call you intend to use. Each of these contains an example.
 
 ## Direct Tracking
 
-
 ## Parameters
 
-Here is a description of all the available parameters. Which of these you provide to us are dependant on the agreed contract.
+Here is a description of all available parameters. Which of these you provide are dependent on the agreed contract.
 
 ### Mandatory parameters
 
 | Parameter | Description | Data Type | Example |
 |---|---|---|---|
-| partnerId | Your PartnerId as provided by UNiDAYS. If you operate in multiple geographic regions you _may_ have a different PartnerId for each region | String | 0LTio6iVNaKj861RM9azJQ== |
+| partnerId | Your partnerId as provided by UNiDAYS. If you operate in multiple geographic regions you _may_ have a different partnerId for each region | String | 0LTio6iVNaKj861RM9azJQ== |
 | transactionId | A unique ID for the transaction in your system | String | Order123 |
 | currency | The ISO 4217 currency code | String | GBP |
 | code | The UNiDAYS discount code used | String | ABC123 |
 
-### Optional parameters
+### Additional parameters
 
-Note any of the following properties to which the value is unknown should be omitted from calls (assign `null`). Which of the following values you provide to us will depend on your agreed contract.
+Note: any of the following parameters to which the value is unknown/inessential should be omitted from calls (assign `null`). Which of the following values you provide to us will depend on your agreed contract.
 
 | Parameter | Description | Data Type | Example |
 |---|---|---|---|
@@ -63,11 +63,11 @@ Note any of the following properties to which the value is unknown should be omi
 | itemsGross | Total monetary amount of the items, including tax, before any discounts are applied, formatted to 2 decimal places | Decimal | 230.00 |
 | itemsOtherDiscount | Total monetary amount of all non UNiDAYS discounts applied to `itemsGross`, formatted to 2 decimal places | Decimal | 10.00 |
 | unidaysDiscountPercentage | The UNiDAYS discount applied, as a percentage, formatted to 2 decimal places | Decimal | 10.00 |
-| newCustomer | Is the user a new (vs returning) customer to you? | Boolean integer | 1 or 0 |
+| newCustomer | Is the user a new (vs returning) customer to you? | Boolean | true or false |
 
 ### Example Basket
 
-Here is an example basket with the fields relating to UNiDAYS tracking parameters,
+Here is an example basket with the fields relating to UNiDAYS tracking parameters.
 
 | Item | Gross | UNiDAYS Discount | Other Discount | Tax | Net Total | Line Total |
 |---|---|---|---|---|---|---|
@@ -96,9 +96,9 @@ This is known as our client-script to server integration
 
 #### Making the call
 
-The method to get the URL to make a client-to-server request with is `createScriptUrl(args...)`. To implement this method you first need to ensure that you have access to all required transaction details.
+The method to get the URL to make a client-to-server request with is `createScriptUrl(args...)`. To implement this method, you first need to ensure that you have access to all required transaction details.
 
-Once you have access to this transaction information, create a UnidaysTracking object, providing the mandatory parameters as arguments (`UnidaysTracking(partnerId, currency, transactionId, code)`) and call `.createScriptUrl(args...)` where the `args` are the transaction details you are required to send to the UNiDAYS Tracking API.
+Once you have access to this transaction information, create a UnidaysTracking object, providing the [mandatory parameters](#mandatory-parameters) as arguments `new UnidaysTracking(partnerId, currency, transactionId, code)` and call `.createScriptUrl(args...)`, where the `args` are the transaction details you have contractually agreed to send to UNiDAYS.
 
 #### Return
 
@@ -107,9 +107,9 @@ A URL will be returned to you, which can then be used to call the UNiDAYS Tracki
 #### Example
 
 ```html
-<script type="text/javascript" src="unidays.js"></script>
+<script type='text/javascript' src='unidays.js'></script>
 
-<script type="text/javascript">
+<script type='text/javascript'>
     (function (window) {
         // UNiDAYS will provide your partnerId.
         var partnerId = '0LTio6iVNaKj861RM9azJQ==';
@@ -125,7 +125,7 @@ A URL will be returned to you, which can then be used to call the UNiDAYS Tracki
         // Pass in the remaining corresponding transaction details to the createScriptUrl method.
         var url = unidays.createScriptUrl(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, 1);
 
-        // You now have a URL which can be used in a script element to call the API.
+        // You now have a URL which can be used within a script element to call the API.
     }(window));
 </script>
 ```
@@ -136,20 +136,20 @@ This will create the client-script URL and perform the request to the UNiDAYS Tr
 
 #### Making the call
 
-The method to call the API with a client-script request is `trackingScriptRequest(args...)`. To implement this method you first need to ensure that you have access to all required transaction details.
+The method to call the API with a client-script request is `trackingScriptRequest(args...)`. To implement this method, you first need to ensure that you have access to all required transaction details.
 
-Once you have access to this transaction information, create a UnidaysTracking object, providing the mandatory parameters as arguments (`UnidaysTracking(partnerId, currency, transactionId, code)`) and call `.trackingScriptRequest(args...)` where the `args` are the transaction details you are required to send to the UNiDAYS Tracking API.
+Once you have access to this transaction information, create a UnidaysTracking object, providing the mandatory parameters as arguments `new UnidaysTracking(partnerId, currency, transactionId, code)` and call `.trackingScriptRequest(args...)`, where the `args` are the transaction details you have contractually agreed to send to UNiDAYS.
 
 #### Return
 
-A URL will be created and called for you within a script element
+A URL will be created and called for you within a script element.
 
 #### Example
 
 ```html
-<script type="text/javascript" src="unidays.js"></script>
+<script type='text/javascript' src='unidays.js'></script>
 
-<script type="text/javascript">
+<script type='text/javascript'>
     (function (window) {
         // UNiDAYS will provide your partnerId.
         var partnerId = '0LTio6iVNaKj861RM9azJQ==';
@@ -181,9 +181,9 @@ The UnidaysTracking object, configured in test mode, will add an extra parameter
 #### Example
 
 ```html
-<script type="text/javascript" src="unidays.js"></script>
+<script type='text/javascript' src='unidays.js'></script>
 
-<script type="text/javascript">
+<script type='text/javascript'>
     (function (window) {
         // UNiDAYS will provide your partnerId.
         var partnerId = '0LTio6iVNaKj861RM9azJQ==';
@@ -210,14 +210,14 @@ We use [Jest](https://jestjs.io/) for our Unit Tests
 
 ### Installation
 
-To install, run `npm install` from your favourite terminal.
+To install the Jest test-runner and all dependencies for this project, run `npm install` from your favourite terminal within the project directory.
 
 ### Running the tests
 
-To run the tests, run `npm test` from your favourite terminal.
+To run the tests, run `npm test` from your favourite terminal within the project directory.
 
 ## Contributing
 
-This project is set up as an open source project. As such, if there any any suggestions you have for features, for improving the code itself or come across any problems, you can raise them and / or suggest changes in implementation.
+This project is set up as an open source project. As such, if there are any suggestions that you have for features, for improving the code itself, or you have come across any problems; you can raise them and/or suggest changes in implementation.
 
 If you are interested in contributing to this codebase, please follow the [contributing guidelines](./.github/contributing.md). This contains guides on both contributing directly and raising feature requests or bug reports. Please adhere to our [code of conduct](./CODE_OF_CONDUCT.md) when doing any of the above.
