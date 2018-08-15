@@ -2,7 +2,7 @@ sudo: false
 language: node_js
 node_js:
 - stable
-- "8"
+- '8'
 script:
 - npm install
 - npm test
@@ -10,9 +10,9 @@ after_success:
 - npm run report-coverage
 deploy:
   provider: npm
-  email: "dev.api@mynidays.com"
+  email: dev.api@mynidays.com
   api_key:
-    secure: rojcjgAjAgiykWLuyuVFOdbK5RjPIbHgxUNi1cEDy1QPK3iPVJ+kCIlLLgbDgCId4H46FVi6WIF/XcsIMuywheZyGKZF5xBjhS/zavMQeRGH/sVWbPkJLbKNGqGMjRVWH2JqBDnzS+uOhrV83A5nugS4NjLhZMwwR0bNyqNTNmXsWxy0Bx5+oI00FH0aHuY6Y8WnrJDOT8LC64+Vf2SceJ3mWHzuiWXuU1WyBnM8oRTAgluwYAUhMpQkPdzb9m8RlER0LecxZ9Yj3tYvQ333XDdmk3wTY4zMVmOXSRAqsvKhHGA0TBzB025Q88kQ/tOwIOzN6R91BORtIwMpKHYlEAhSHETiD19N6c/3t1CbTu8yeluNUCTwQQLtXLPhMeFDFcRNqaABQlGEPgumMWLHSZa9dKXGzues5LTKgg1wqtO+ZsOFdtmvHvYHjNtIkQHDC5jZcMrBf8KXYBIl23b3JME1I5L6I3uIW82BzVo1rRng9nDPnWcoTw+ypkyAMCFQdHYi/7icq0bmwfVNgP4NX2YfeY9RFpXFJ+mnGFuu+7oB3k1PH2G29o9kZQ/nsX17x+HqFmRq9l6N7rYU6EaJtMIUtZbSYlNwi1YMPayGcBVFTF8zQPtg7vnyiaVdMGTVYkVmI4XeiWOIdxHSads4GwUULhuU1f501V0/6zUcMyU=
+    secure: rSSF1KuOJpZeGhAGZnTL3UZ/ezUOCfeUOBjkN7pI2FL1SEnaW6ZZ68ijlr5diUf8vSs8XnNOg8g9t2vHZCrgrjPPkM/8S8rDhxfhjBw1EF7BbOXcKOS9V0KuAMWqaQgAib1wgRwbJTvoCiRVaneh8hiVQLpI3xR4C21iBGwWMKmeNIPBNE9ykN9NJIW/uaomQL3AAYxdjm4Lx5viGUkqwRmkSVjAceGL1rzps+8Fk8V2vXpzEPTSrPT7KXgd/OnUvKrVhLS3T/hnJInqxTfNZD1fp/d5c3xfsJlCf41sLB3ycN7V8ARr0KKiDSvBWRsc2E1tIwF6KwmcP+CkwLygm5yn7yEcL6wmSXbiZsTASS4/s+tPxRWacAO3wXVtrmQKXOmyrWSvgiCblUhBa7wkG1b+PuKBLS8b2VtQCqgQN/RcgHHMqFeczQPK3LV3lEceEr1kD2eJ9NhqE9n3tjbUC0ykwIeyXyCCpBd7+UmvQaYBRN90Fz/YgfX63Q0cjecgxV7K6ZeScD7DBuPS3HpsyDHVE7kep6lbW7bydwbN5j1HQaWHv7naL3jZT5/jx8UphQKOB+rVq57zBYgCIOcWUgxcMVpTTmLOlFTGTYZjoyekepv2XDJJrasXMl4q6Tv2yDfuB/XJ3lf40Qh8APz/NsfrM/0Oj/uGRu8dk7NeC9U=
   on:
     branch: master
-    node: 'stable'
+    node: stable
