@@ -72,8 +72,3 @@ function UnidaysTracking(partnerId, currency, transactionId, code, test) {
         this._makeRequest(url, 'script');
     }
 }
-
-// Node
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = UnidaysTracking;
-}
