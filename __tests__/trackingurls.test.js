@@ -1,4 +1,4 @@
-const unidaysTracking = require('../src/unidays');
+const unidaysTracking = global.unidaysTracking;
 
 describe('When creating a tracking url', () => {
     let tracking;
