@@ -44,7 +44,7 @@ Here is a description of all available parameters. Which of these you provide ar
 
 | Parameter | Description | Data Type | Example |
 |---|---|---|---|
-| partnerId | Your partnerId as provided by UNiDAYS. If you operate in multiple geographic regions you _may_ have a different partnerId for each region | String | 0LTio6iVNaKj861RM9azJQ== |
+| partnerId | Your partnerId as provided by UNiDAYS. If you operate in multiple geographic regions you _may_ have a different partnerId for each region | Base64 Encoded Guid | XaxptFh0sK8Co6pI== |
 | transactionId | A unique ID for the transaction in your system | String | Order123 |
 | currency | The ISO 4217 currency code | String | GBP |
 | code | The UNiDAYS discount code used | String | ABC123 |
@@ -102,7 +102,7 @@ Once you have access to this transaction information, create a UnidaysTracking o
 
 #### Return
 
-A URL will be returned to you, which can then be used to call the UNiDAYS Tracking API.
+A URL will be returned to you which can be used to call the API. If successful a response with a status code of 200 OK will be returned. This will only work for `GET` requests.
 
 #### Example
 
@@ -111,7 +111,7 @@ A URL will be returned to you, which can then be used to call the UNiDAYS Tracki
 
 <script type='text/javascript'>
     (function (window) {
-        // UNiDAYS will provide your partnerId.
+       // UNiDAYS will provide your partnerId. The partnerId GUID needs to be Base64 encoded before passing it to the DirectTrackingDetailsBuilder
         var partnerId = '0LTio6iVNaKj861RM9azJQ==';
 
         // These must be based on the real values of the transaction.
@@ -142,7 +142,7 @@ Once you have access to this transaction information, create a UnidaysTracking o
 
 #### Return
 
-A URL will be created and called for you within a script element.
+A URL will be created and called for you within a script element. If successful the response should have a status code of 204 No Content.
 
 #### Example
 
@@ -151,7 +151,7 @@ A URL will be created and called for you within a script element.
 
 <script type='text/javascript'>
     (function (window) {
-        // UNiDAYS will provide your partnerId.
+        // UNiDAYS will provide your partnerId and signingKey. The partnerId GUID needs to be Base64 encoded before passing it to the DirectTrackingDetailsBuilder
         var partnerId = '0LTio6iVNaKj861RM9azJQ==';
 
         // These must be based on the real values of the transaction.
@@ -185,7 +185,7 @@ The UnidaysTracking object, configured in test mode, will add an extra parameter
 
 <script type='text/javascript'>
     (function (window) {
-        // UNiDAYS will provide your partnerId.
+       // UNiDAYS will provide your partnerId and signingKey. The partnerId GUID needs to be Base64 encoded before passing it to the DirectTrackingDetailsBuilder
         var partnerId = '0LTio6iVNaKj861RM9azJQ==';
 
         // These must be based on the real values of the transaction.
