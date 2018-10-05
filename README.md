@@ -107,7 +107,7 @@ A URL will be returned to you which can be used to call the API. If successful a
 #### Example
 
 ```html
-<script type='text/javascript' src='unidays.js'></script>
+<script type='text/javascript' src='unidays-tracking.js'></script>
 
 <script type='text/javascript'>
     (function (window) {
@@ -147,7 +147,7 @@ A URL will be created and called for you within a script element. If successful 
 #### Example
 
 ```html
-<script type='text/javascript' src='unidays.js'></script>
+<script type='text/javascript' src='unidays-tracking.js'></script>
 
 <script type='text/javascript'>
     (function (window) {
@@ -181,7 +181,7 @@ The UnidaysTracking object, configured in test mode, will add an extra parameter
 #### Example
 
 ```html
-<script type='text/javascript' src='unidays.js'></script>
+<script type='text/javascript' src='unidays-tracking.js'></script>
 
 <script type='text/javascript'>
     (function (window) {
