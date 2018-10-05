@@ -1,11 +1,11 @@
 {
   "name": "unidays-javascript",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "This is the JavaScript library for integrating with UNiDAYS. This is to be used for coded integrations.",
-  "main": "unidays.js",
+  "main": "unidays-tracking.js",
   "scripts": {
     "test": "jest",
-    "pack": "cpx \"src/unidays.js\" dist && uglifyjs src/unidays.js -o dist/unidays.min.js --compress --mangle"
+    "pack": "cpx \"src/unidays-tracking.js\" dist && uglifyjs src/unidays-tracking.js -o dist/unidays-tracking.min.js --compress --mangle"
   },
   "repository": {
     "type": "git",
