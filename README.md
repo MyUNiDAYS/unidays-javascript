@@ -21,7 +21,7 @@ This is the JavaScript library for integrating with UNiDAYS. This is to be used 
 - [Example Usage](#example-usage)
     - [Create Script URL _(returns url for use in a script element)_](#create-script-url)
     - [Tracking Script Request _(performs the web request asynchronously within a script element)_](#tracking-script-request)
-    - [Tag Managers & CDN _(use this package without including it as a file)_](#tag-managers-&-cdn)
+    - [Tag Managers and CDN _(use this package without including it as a file)_](#tag-managers-and-cdn)
     - [Test endpoint](#test-endpoint)
 
 [Unit Tests](#unit-tests)
@@ -205,7 +205,7 @@ The UnidaysTracking object, configured in test mode, will add an extra parameter
 </script>
 ```
 
-### Tag Managers & CDN
+### Tag Managers and CDN
 
 This will demonstrate how to use this Javascript helper within a Tag (e.g. Google Tag Manager or other similar CMS) and/or how to pull in the UNiDAYS Javascript client helper through our CDN.
 
