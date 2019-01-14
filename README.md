@@ -21,6 +21,7 @@ This is the JavaScript library for integrating with UNiDAYS. This is to be used 
 - [Example Usage](#example-usage)
     - [Create Script URL _(returns url for use in a script element)_](#create-script-url)
     - [Tracking Script Request _(performs the web request asynchronously within a script element)_](#tracking-script-request)
+    - [Tag Managers & CDN _(use this package without including it as a file)_](#tag-managers-&-cdn)
     - [Test endpoint](#test-endpoint)
 
 [Unit Tests](#unit-tests)
@@ -102,7 +103,7 @@ Once you have access to this transaction information, create a UnidaysTracking o
 
 #### Return
 
-A URL will be returned to you which can be used to call the API. If successful a response with a status code of 200 OK will be returned. This will only work for `GET` requests.
+A URL will be returned to you which can be used to call the API. If successful a response with a status code of 200 OK will be returned. This will only work with `GET` requests.
 
 #### Example
 
@@ -111,7 +112,7 @@ A URL will be returned to you which can be used to call the API. If successful a
 
 <script type='text/javascript'>
     (function (window) {
-       // UNiDAYS will provide your partnerId. The partnerId GUID needs to be Base64 encoded before passing it to the DirectTrackingDetailsBuilder
+       // UNiDAYS will provide your partnerId.
         var partnerId = '0LTio6iVNaKj861RM9azJQ==';
 
         // These must be based on the real values of the transaction.
@@ -142,7 +143,7 @@ Once you have access to this transaction information, create a UnidaysTracking o
 
 #### Return
 
-A URL will be created and called for you within a script element. If successful the response should have a status code of 204 No Content.
+A URL will be created and called for you within a script element. If successful the response should have a status code of 200 OK.
 
 #### Example
 
@@ -151,7 +152,7 @@ A URL will be created and called for you within a script element. If successful 
 
 <script type='text/javascript'>
     (function (window) {
-        // UNiDAYS will provide your partnerId and signingKey. The partnerId GUID needs to be Base64 encoded before passing it to the DirectTrackingDetailsBuilder
+        // UNiDAYS will provide your partnerId and signingKey.
         var partnerId = '0LTio6iVNaKj861RM9azJQ==';
 
         // These must be based on the real values of the transaction.
@@ -185,7 +186,7 @@ The UnidaysTracking object, configured in test mode, will add an extra parameter
 
 <script type='text/javascript'>
     (function (window) {
-       // UNiDAYS will provide your partnerId and signingKey. The partnerId GUID needs to be Base64 encoded before passing it to the DirectTrackingDetailsBuilder
+       // UNiDAYS will provide your partnerId and signingKey.
         var partnerId = '0LTio6iVNaKj861RM9azJQ==';
 
         // These must be based on the real values of the transaction.
@@ -200,6 +201,52 @@ The UnidaysTracking object, configured in test mode, will add an extra parameter
         unidays.createScriptUrl(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, 1);
 
         // You now have a script URL which can be used to test your implementation.
+    }(window));
+</script>
+```
+
+### Tag Managers & CDN
+
+This will demonstrate how to use this Javascript helper within a Tag (e.g. Google Tag Manager or other similar CMS) and/or how to pull in the UNiDAYS Javascript client helper through our CDN.
+
+Note: We have included the SHA384 in the snippet below; file integrity is guaranteed, so you can be assured that you are always pulling in the official UNiDAYS JavaScript helper.
+
+#### Making the call
+
+The method to call the API with a client-script request is `trackingScriptRequest(args...)`. To implement this method, you first need to ensure that you have access to all required transaction details. In Google Tag Manager, for example, all of the required transaction information should be already available within the Data Layer for your online store. If any required information is not already available within the Data Layer for your online store, please contact your Development team and ensure this information has been added.
+
+Once you have access to this transaction information, create a UnidaysTracking object, providing the mandatory parameters as arguments `new UnidaysTracking(partnerId, currency, transactionId, code)` and call `.trackingScriptRequest(args...)`, where the `args` are the transaction details you have contractually agreed to send to UNiDAYS.
+
+Note: Most Tag Manangers (such as Google Tag Manager) requires you to reference Data Layer / User-Defined variables using `{{This Syntax}}` or something similar. If you are unsure, please contact your Development team associated with the Tag Manager platform you use.
+
+#### Return
+
+A URL will be created and called for you within a script element. If successful the response should have a status code of 200 OK.
+
+#### Example
+
+```html
+<script src="https://cdn.unidays.world/unidays-tracking.min.js"
+    integrity="sha384-bUvPj5fOb894FDlGsAUHEdp1F9DILx2A5Kiq0abipj7QpjClwoO9iFSWnZvVhn2q"
+    crossorigin="anonymous"></script>
+
+<script type='text/javascript'>
+    (function (window) {
+        // UNiDAYS will provide your partnerId and signingKey.
+        var partnerId = '0LTio6iVNaKj861RM9azJQ==';
+
+        // These must be based on the real values of the transaction. (e.g. For Google Tag Manager, please reference your Data Layer)
+        var currency = 'GBP';
+        var transactionId = 'Order123';
+        var code = 'ABC123';
+
+        // Create a reference to the UnidaysTracking object, passing in your partnerId, currency, transactionId and code.
+        var unidays = new UnidaysTracking(partnerId, currency, transactionId, code);
+
+        // Pass in the remaining corresponding transaction details to the trackingScriptRequest method. (e.g. For Google Tag Manager, please reference your Data Layer)
+        unidays.trackingScriptRequest(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, 1);
+
+        // The method has built the request and performed a request to our API within a script element.
     }(window));
 </script>
 ```
