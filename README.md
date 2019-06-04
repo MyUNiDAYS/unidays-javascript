@@ -209,7 +209,15 @@ The UnidaysTracking object, configured in test mode, will add an extra parameter
 
 This will demonstrate how to use this Javascript helper within a Tag (e.g. Google Tag Manager or other similar CMS) and/or how to pull in the UNiDAYS Javascript client helper through our CDN.
 
-Note: We have included the SHA384 in the snippet below; file integrity is guaranteed, so you can be assured that you are always pulling in the official UNiDAYS JavaScript helper.
+Note: We have included the SHA384 in the example below; file integrity is guaranteed, so you can be assured that you are always pulling in the official UNiDAYS JavaScript helper.
+
+**However**, if your Tag Manager or CMS does not support the `integrity` attribute within `<script>` elements, simply remove the `integrity` and `crossorigin` attributes.
+
+e.g.
+
+```html
+<script src="https://cdn.unidays.world/unidays-tracking.min.js"></script>
+```
 
 #### Making the call
 
