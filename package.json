@@ -19,9 +19,9 @@
   "homepage": "https://github.com/MyUNiDAYS/unidays-javascript#readme",
   "dependencies": {
     "cpx": "^1.5.0",
-    "jest": "^23.4.1",
-    "uglify-js": "^3.4.5",
-    "eval": "^0.1.2"
+    "eval": "^0.1.2",
+    "jest": "^24.8.0",
+    "uglify-js": "^3.4.5"
   },
   "jest": {
     "verbose": true,
