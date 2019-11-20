@@ -101,6 +101,8 @@ The method to get the URL to make a client-to-server request with is `createScri
 
 Once you have access to this transaction information, create a UnidaysTracking object, providing the [mandatory parameters](#mandatory-parameters) as arguments `new UnidaysTracking(partnerId, currency, transactionId, code)` and call `.createScriptUrl(args...)`, where the `args` are the transaction details you have contractually agreed to send to UNiDAYS.
 
+Note: The `args` passed into `createScriptUrl()` must all the present and in the correct order, as per the example below. If a value is unknown/inessential, pass `null` or `0`.
+
 #### Return
 
 A URL will be returned to you which can be used to call the API. If successful a response with a status code of 200 OK will be returned. This will only work with `GET` requests.
@@ -112,7 +114,7 @@ A URL will be returned to you which can be used to call the API. If successful a
 
 <script type='text/javascript'>
     (function (window) {
-       // UNiDAYS will provide your partnerId.
+        // UNiDAYS will provide your partnerId.
         var partnerId = '0LTio6iVNaKj861RM9azJQ==';
 
         // These must be based on the real values of the transaction.
@@ -120,11 +122,22 @@ A URL will be returned to you which can be used to call the API. If successful a
         var transactionId = 'Order123';
         var code = 'ABC123';
 
+        var orderTotal = 209.00;
+        var itemsUnidaysDiscount = 13.00;
+        var itemsTax = 34.50;
+        var shippingGross = 5.00;
+        var shippingDiscount = 3.00;
+        var itemsGross = 230.00;
+        var itemsOtherDiscount = 10.00;
+        var unidaysDiscountPercentage = 10.00;
+        var newCustomer = 1;
+
         // Create a reference to the UnidaysTracking object, passing in your partnerId, currency, transactionId and code.
         var unidays = new UnidaysTracking(partnerId, currency, transactionId, code);
 
         // Pass in the remaining corresponding transaction details to the createScriptUrl method.
-        var url = unidays.createScriptUrl(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, 1);
+        var url = unidays.createScriptUrl(orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross,
+            shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer);
 
         // You now have a URL which can be used within a script element to call the API.
     }(window));
@@ -141,6 +154,8 @@ The method to call the API with a client-script request is `trackingScriptReques
 
 Once you have access to this transaction information, create a UnidaysTracking object, providing the mandatory parameters as arguments `new UnidaysTracking(partnerId, currency, transactionId, code)` and call `.trackingScriptRequest(args...)`, where the `args` are the transaction details you have contractually agreed to send to UNiDAYS.
 
+Note: The `args` passed into `trackingScriptRequest()` must all the present and in the correct order, as per the example below. If a value is unknown/inessential, pass `null` or `0`.
+
 #### Return
 
 A URL will be created and called for you within a script element. If successful the response should have a status code of 200 OK.
@@ -152,7 +167,7 @@ A URL will be created and called for you within a script element. If successful 
 
 <script type='text/javascript'>
     (function (window) {
-        // UNiDAYS will provide your partnerId and signingKey.
+        // UNiDAYS will provide your partnerId.
         var partnerId = '0LTio6iVNaKj861RM9azJQ==';
 
         // These must be based on the real values of the transaction.
@@ -160,11 +175,22 @@ A URL will be created and called for you within a script element. If successful 
         var transactionId = 'Order123';
         var code = 'ABC123';
 
+        var orderTotal = 209.00;
+        var itemsUnidaysDiscount = 13.00;
+        var itemsTax = 34.50;
+        var shippingGross = 5.00;
+        var shippingDiscount = 3.00;
+        var itemsGross = 230.00;
+        var itemsOtherDiscount = 10.00;
+        var unidaysDiscountPercentage = 10.00;
+        var newCustomer = 1;
+
         // Create a reference to the UnidaysTracking object, passing in your partnerId, currency, transactionId and code.
         var unidays = new UnidaysTracking(partnerId, currency, transactionId, code);
 
         // Pass in the remaining corresponding transaction details to the trackingScriptRequest method.
-        unidays.trackingScriptRequest(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, 1);
+        unidays.trackingScriptRequest(orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross,
+            shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer);
 
         // The method has built the request and performed a request to our API within a script element.
     }(window));
@@ -186,7 +212,7 @@ The UnidaysTracking object, configured in test mode, will add an extra parameter
 
 <script type='text/javascript'>
     (function (window) {
-       // UNiDAYS will provide your partnerId and signingKey.
+        // UNiDAYS will provide your partnerId.
         var partnerId = '0LTio6iVNaKj861RM9azJQ==';
 
         // These must be based on the real values of the transaction.
@@ -194,11 +220,22 @@ The UnidaysTracking object, configured in test mode, will add an extra parameter
         var transactionId = 'Order123';
         var code = 'ABC123';
 
+        var orderTotal = 209.00;
+        var itemsUnidaysDiscount = 13.00;
+        var itemsTax = 34.50;
+        var shippingGross = 5.00;
+        var shippingDiscount = 3.00;
+        var itemsGross = 230.00;
+        var itemsOtherDiscount = 10.00;
+        var unidaysDiscountPercentage = 10.00;
+        var newCustomer = 1;
+
         // Create a reference to the UnidaysTracking object, passing an additional argument of true to instantiate in test mode.
         var unidays = new UnidaysTracking(partnerId, currency, transactionId, code, true);
 
         // Pass in the remaining corresponding transaction details to the createScriptUrl method.
-        unidays.createScriptUrl(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, 1);
+        var url = unidays.createScriptUrl(orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross,
+            shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer);
 
         // You now have a script URL which can be used to test your implementation.
     }(window));
@@ -225,6 +262,8 @@ The method to call the API with a client-script request is `trackingScriptReques
 
 Once you have access to this transaction information, create a UnidaysTracking object, providing the mandatory parameters as arguments `new UnidaysTracking(partnerId, currency, transactionId, code)` and call `.trackingScriptRequest(args...)`, where the `args` are the transaction details you have contractually agreed to send to UNiDAYS.
 
+Note: The `args` passed into `trackingScriptRequest()` must all the present and in the correct order, as per the example below. If a value is unknown/inessential, pass `null` or `0`.
+
 Note: Most Tag Manangers (such as Google Tag Manager) requires you to reference Data Layer / User-Defined variables using `{{This Syntax}}` or something similar. If you are unsure, please contact your Development team associated with the Tag Manager platform you use.
 
 #### Return
@@ -248,11 +287,22 @@ A URL will be created and called for you within a script element. If successful 
         var transactionId = 'Order123';
         var code = 'ABC123';
 
+        var orderTotal = 209.00;
+        var itemsUnidaysDiscount = 13.00;
+        var itemsTax = 34.50;
+        var shippingGross = 5.00;
+        var shippingDiscount = 3.00;
+        var itemsGross = 230.00;
+        var itemsOtherDiscount = 10.00;
+        var unidaysDiscountPercentage = 10.00;
+        var newCustomer = 1;
+
         // Create a reference to the UnidaysTracking object, passing in your partnerId, currency, transactionId and code.
         var unidays = new UnidaysTracking(partnerId, currency, transactionId, code);
 
-        // Pass in the remaining corresponding transaction details to the trackingScriptRequest method. (e.g. For Google Tag Manager, please reference your Data Layer)
-        unidays.trackingScriptRequest(209.00, 13.00, 34.50, 5.00, 3.00, 230.00, 10.00, 10.00, 1);
+        // Pass in the remaining corresponding transaction details to the trackingScriptRequest method.
+        unidays.trackingScriptRequest(orderTotal, itemsUnidaysDiscount, itemsTax, shippingGross,
+            shippingDiscount, itemsGross, itemsOtherDiscount, unidaysDiscountPercentage, newCustomer);
 
         // The method has built the request and performed a request to our API within a script element.
     }(window));
