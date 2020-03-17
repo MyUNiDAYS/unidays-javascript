@@ -1,6 +1,6 @@
 {
   "name": "unidays-javascript",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "This is the JavaScript library for integrating with UNiDAYS. This is to be used for coded integrations.",
   "main": "unidays-tracking.js",
   "scripts": {
