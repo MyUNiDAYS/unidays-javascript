@@ -54,9 +54,6 @@ jobs:
           at: .
       - aws-cli/setup
       - run:
-          name: Install awscli
-          command: sudo pip install awscli
-      - run:
           name: Upload source files S3
           command: |
             aws s3 cp dist/unidays-tracking.js s3://$CDN_BUCKET_NAME/unidays-tracking.js
