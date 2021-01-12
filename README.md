@@ -3,8 +3,7 @@
 </p>
 <br/>
 
-[![Build Status](https://travis-ci.org/MyUNiDAYS/unidays-javascript.svg?branch=master)](https://travis-ci.org/MyUNiDAYS/unidays-javascript)
-[![npm version](https://badge.fury.io/js/unidays-javascript.svg)](https://badge.fury.io/js/unidays-javascript)
+[![npm version](https://badge.fury.io/js/unidays-javascript.svg)](https://badge.fury.io/js/unidays-javascript) [![CircleCI](https://circleci.com/gh/MyUNiDAYS/unidays-javascript.svg?style=svg)](https://circleci.com/gh/MyUNiDAYS/unidays-javascript/tree/master)
 
 # UNiDAYS JavaScript Library
 

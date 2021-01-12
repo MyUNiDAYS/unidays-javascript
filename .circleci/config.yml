@@ -1,0 +1,72 @@
+version: 2.1
+orbs:
+    aws-cli: circleci/aws-cli@0.1.20
+jobs:
+  test:
+    parameters:
+      node-version:
+        type: string
+    docker:
+      - image: circleci/node:<< parameters.node-version >>
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            npm install
+            npm install jest-junit
+      - run:
+          name: Run tests
+          command: npm test -- --ci --runInBand --reporters=default --reporters=jest-junit
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/junit
+      - store_artifacts:
+          path: ./reports/junit
+      - store_test_results:
+          path: ./reports/junit
+      - persist_to_workspace:
+            root: .
+            paths: .
+  deploy:
+    docker:
+      - image: circleci/python:3-node
+    steps:
+      - attach_workspace:
+          at: .
+      - aws-cli/setup
+      - run:
+          name: Upload source files S3
+          command: |
+            aws s3 cp dist/unidays-tracking.js s3://$CDN_BUCKET_NAME/unidays-tracking.js
+            aws s3 cp dist/unidays-tracking.min.js s3://$CDN_BUCKET_NAME/unidays-tracking.min.js
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      - run:
+          name: Publish package
+          command: npm publish
+workflows:
+  version: 2
+  branch-push:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              node-version: ["erbium", "fermium"]
+          filters:
+            branches:
+              ignore: master
+  master-push:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              node-version: ["erbium", "fermium"]
+          filters:
+            branches:
+              only: master
+      - deploy:
+          name: deploy
+          context: cdn-publisher
+          requires:
+            - test
