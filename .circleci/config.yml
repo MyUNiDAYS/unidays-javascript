@@ -7,7 +7,7 @@ jobs:
       node-version:
         type: string
     docker:
-      - image: circleci/node:<< parameters.node-version >>
+      - image: circleci/node:<<parameters.node-version>>
     steps:
       - checkout
       - run:
@@ -20,13 +20,15 @@ jobs:
           command: npm test -- --ci --runInBand --reporters=default --reporters=jest-junit
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit
-      - store_artifacts:
-          path: ./reports/junit
       - store_test_results:
           path: ./reports/junit
-      - persist_to_workspace:
-            root: .
-            paths: .
+      - when:
+          condition:
+            equal: [ "fermium", <<parameters.node-version>> ]
+          steps:
+            - persist_to_workspace:
+                root: .
+                paths: .
   deploy:
     docker:
       - image: circleci/python:3-node
