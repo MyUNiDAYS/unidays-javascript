@@ -2,9 +2,12 @@ version: 2.1
 orbs:
     aws-cli: circleci/aws-cli@0.1.20
 jobs:
-  test-erbium:
+  test:
+    parameters:
+      node-version:
+        type: string
     docker:
-      - image: circleci/node:erbium
+      - image: circleci/node:<< parameters.node-version >>
     steps:
       - checkout
       - run:
@@ -24,28 +27,6 @@ jobs:
       - persist_to_workspace:
             root: .
             paths: .
-  test-fermium:
-    docker:
-      - image: circleci/node:fermium
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: |
-            npm install
-            npm install jest-junit
-      - run:
-          name: Run tests
-          command: npm test -- --ci --runInBand --reporters=default --reporters=jest-junit
-          environment:
-            JEST_JUNIT_OUTPUT_DIR: ./reports/junit
-      - store_artifacts:
-          path: ./reports/junit
-      - store_test_results:
-          path: ./reports/junit
-      - persist_to_workspace:
-            root: . 
-            paths: .
   deploy:
     docker:
       - image: circleci/python:3-node
@@ -64,26 +45,23 @@ jobs:
       - run:
           name: Publish package
           command: npm publish
-
 workflows:
   version: 2
   branch-push:
     jobs:
-      - test-erbium:
-          filters:
-            branches:
-              ignore: master
-      - test-fermium:
+      - test:
+          matrix:
+            parameters:
+              node-version: ["erbium", "fermium"]
           filters:
             branches:
               ignore: master
   master-push:
     jobs:
-      - test-erbium:
-          filters:
-            branches:
-              only: master
-      - test-fermium:
+      - test:
+          matrix:
+            parameters:
+              node-version: ["erbium", "fermium"]
           filters:
             branches:
               only: master
@@ -91,5 +69,4 @@ workflows:
           name: deploy
           context: cdn-publisher
           requires:
-            - test-erbium
-            - test-fermium
+            - test
