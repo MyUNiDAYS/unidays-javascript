@@ -2,7 +2,7 @@
   "name": "unidays-javascript",
   "version": "1.0.22",
   "description": "This is the JavaScript library for integrating with UNiDAYS. This is to be used for coded integrations.",
-  "main": "unidays-tracking.js",
+  "main": "dist/unidays-tracking.min.js",
   "scripts": {
     "test": "jest",
     "pack": "cpx \"src/unidays-tracking.js\" dist && uglifyjs src/unidays-tracking.js -o dist/unidays-tracking.min.js --compress --mangle"

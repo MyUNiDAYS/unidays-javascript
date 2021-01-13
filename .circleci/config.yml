@@ -30,7 +30,6 @@ jobs:
                 root: .
                 paths:
                   - dist
-                  - src
                   - package.json
                   - README.md
   deploy:
