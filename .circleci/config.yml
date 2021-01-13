@@ -32,6 +32,7 @@ jobs:
                   - dist
                   - src
                   - package.json
+                  - README.md
   deploy:
     docker:
       - image: circleci/python:3-node
